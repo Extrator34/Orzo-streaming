@@ -196,7 +196,7 @@ async def episodes_find(description,season,episode,MFP,MFP_CREDENTIALS,client,st
 async def search(showname,date,season,episode,MFP,MFP_CREDENTIALS,client,streams):
     headers = random_headers.generate()
     
-    response = await client.get(ForwardProxy + f'{ES_DOMAIN}/wp-json/wp/v2/search?search={quote(showname.replace("'"," "))}&_fields=id', proxies = proxies, headers = headers)
+    response = await client.get(ForwardProxy + f"""{ES_DOMAIN}/wp-json/wp/v2/search?search={quote(showname.replace("'"," "))}&_fields=id""", proxies = proxies, headers = headers)
     results = response.json()
     for i in results:
         response = await client.get(ForwardProxy + f"{ES_DOMAIN}/wp-json/wp/v2/posts/{i['id']}?_fields=content,title", proxies = proxies, headers = headers)
